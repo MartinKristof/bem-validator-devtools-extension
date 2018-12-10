@@ -14,6 +14,7 @@ class Agent {
   static sendData() {
       const hrefs = [];
       const stylesheets = [...document.styleSheets];
+
       for (let stylesheet of stylesheets) {
           const href = stylesheet.href;
           hrefs.push(href);

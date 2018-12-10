@@ -51,7 +51,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
   if (tabId in connections && changeInfo.status === 'complete') {
     // TODO: reload connection to page somehow...?
     connections[tabId].postMessage({
-      name: 'reloaded'
-    });
+      name: 'reloaded',
+  });
   }
 });
