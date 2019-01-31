@@ -1,4 +1,4 @@
-var sendMessage = require('./util/sendMessage');
+const sendMessage = require('./util/sendMessage');
 
 class Agent {
   constructor() {
@@ -25,7 +25,7 @@ class Agent {
         return;
       }
 
-      var message = event.data;
+      const message = event.data;
 
       // Only accept messages of correct format (our messages)
       if (typeof message !== 'object' || message === null || message.source !== 'bem-validator-devtools') {
@@ -37,10 +37,10 @@ class Agent {
   }
 
   handleMessage(message) {
-    var handler = this.handlers[message.name];
+    const handler = this.handlers[message.name];
     console.log('receive message from agent', message);
     if (!handler) {
-      console.warn('No handler found for event ' + name);
+      console.warn(`No handler found for event ${message.name}`);
       return;
     }
 

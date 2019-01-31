@@ -1,15 +1,13 @@
-var connections = {};
+const connections = {};
 
-window.browser = (function() {
-  return window.msBrowser || window.browser || window.chrome;
-})();
+window.browser = (() => window.msBrowser || window.browser || window.chrome)();
 
 /*
  * agent -> content-script.js -> **background.js** -> dev tools
  */
-browser.runtime.onMessage.addListener(function(request, sender) {
+browser.runtime.onMessage.addListener((request, sender) => {
   if (sender.tab) {
-    var tabId = sender.tab.id;
+    const tabId = sender.tab.id;
     if (tabId in connections) {
       connections[tabId].postMessage(request);
     } else {
@@ -24,14 +22,14 @@ browser.runtime.onMessage.addListener(function(request, sender) {
 /*
  * agent <- content-script.js <- **background.js** <- dev tools
  */
-browser.runtime.onConnect.addListener(function(port) {
+browser.runtime.onConnect.addListener((port) => {
   // Listen to messages sent from the DevTools page
-  port.onMessage.addListener(function(request) {
+  port.onMessage.addListener((request) => {
     // Register initial connection
     if (request.name === 'init') {
       connections[request.tabId] = port;
 
-      port.onDisconnect.addListener(function() {
+      port.onDisconnect.addListener(() => {
         delete connections[request.tabId];
       });
 
@@ -46,7 +44,7 @@ browser.runtime.onConnect.addListener(function(port) {
   });
 });
 
-browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+browser.tabs.onUpdated.addListener((tabId, changeInfo) => {
   if (tabId in connections && changeInfo.status === 'complete') {
     connections[tabId].postMessage({
       name: 'reloaded',

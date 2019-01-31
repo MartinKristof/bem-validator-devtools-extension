@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import Agent from './Agent';
 
 window.__bem_agent_injected__ = true;

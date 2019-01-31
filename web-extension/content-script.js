@@ -2,30 +2,28 @@
  * agent -> **content-script.js** -> background.js -> dev tools
  */
 
-window.browser = (function() {
-  return window.msBrowser || window.browser || window.chrome;
-})();
+window.browser = (() => window.msBrowser || window.browser || window.chrome)();
 
-window.addEventListener('message', function(event) {
+window.addEventListener('message', (event) => {
   // Only accept messages from same frame
   if (event.source !== window) {
     return;
   }
 
-  var message = event.data;
+  const message = event.data;
 
   // Only accept messages of correct format (our messages)
   if (typeof message !== 'object' || message === null || message.source !== 'bem-validator-agent') {
     return;
   }
 
-  chrome.runtime.sendMessage(message);
+  browser.runtime.sendMessage(message);
 });
 
 /*
  * agent <- **content-script.js** <- background.js <- dev tools
  */
-browser.runtime.onMessage.addListener(function(request) {
+browser.runtime.onMessage.addListener((request) => {
   request.source = 'bem-validator-devtools';
   window.postMessage(request, '*');
 });

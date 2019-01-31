@@ -1,7 +1,7 @@
 import React from 'react';
 
-var FluxMixin = require('fluxxor').FluxMixin(React);
-var StoreWatchMixin = require('fluxxor').StoreWatchMixin;
+const FluxMixin = require('fluxxor').FluxMixin(React);
+const StoreWatchMixin = require('fluxxor').StoreWatchMixin;
 
 const Main = React.createClass({
   mixins: [FluxMixin, StoreWatchMixin('ConnectionStore')],

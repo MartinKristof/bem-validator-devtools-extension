@@ -1,19 +1,19 @@
 import { inspect } from '../inspect';
 
 module.exports = {
-  saveLintedRules: function(rules) {
+  saveLintedRules(rules) {
     this.dispatch('saveLintedRules', rules);
   },
 
-  loading: function() {
+  loading() {
     this.dispatch('loading');
   },
 
-  errorOccurred: function() {
+  errorOccurred() {
     this.dispatch('errorOccurred');
   },
 
-  click: function(selector) {
+  click(selector) {
     inspect(selector);
   },
 };

@@ -1,4 +1,4 @@
-var createVendorChunk = require('webpack-create-vendor-chunk');
+const createVendorChunk = require('webpack-create-vendor-chunk');
 
 module.exports = {
   target: 'web',

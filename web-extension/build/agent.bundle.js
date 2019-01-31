@@ -53,7 +53,8 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	window.__bem_agent_injected__ = true;
+	window.__bem_agent_injected__ = true; /* eslint-disable no-underscore-dangle */
+	
 	
 	var agent = new _Agent2.default();
 
@@ -62,7 +63,7 @@
 /***/ 71:
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -83,10 +84,10 @@
 	    this.handlers = {
 	      // Broadcast when the dev tools are opened
 	      connect: function connect() {
-	        return sendMessage("connected");
+	        return sendMessage('connected');
 	      },
 	      error: function error(_error) {
-	        return sendMessage("errorOccurred", _error);
+	        return sendMessage('errorOccurred', _error);
 	      },
 	      getData: function getData() {
 	        return Agent.sendData();
@@ -97,11 +98,11 @@
 	  }
 	
 	  _createClass(Agent, [{
-	    key: "initDevtoolsMessageListener",
+	    key: 'initDevtoolsMessageListener',
 	    value: function initDevtoolsMessageListener() {
 	      var _this = this;
 	
-	      window.addEventListener("message", function (event) {
+	      window.addEventListener('message', function (event) {
 	        // Only accept messages from same frame
 	        if (event.source !== window) {
 	          return;
@@ -110,7 +111,7 @@
 	        var message = event.data;
 	
 	        // Only accept messages of correct format (our messages)
-	        if ((typeof message === "undefined" ? "undefined" : _typeof(message)) !== "object" || message === null || message.source !== "bem-validator-devtools") {
+	        if ((typeof message === 'undefined' ? 'undefined' : _typeof(message)) !== 'object' || message === null || message.source !== 'bem-validator-devtools') {
 	          return;
 	        }
 	
@@ -118,23 +119,23 @@
 	      });
 	    }
 	  }, {
-	    key: "handleMessage",
+	    key: 'handleMessage',
 	    value: function handleMessage(message) {
 	      var handler = this.handlers[message.name];
-	      console.log("receive message from agent", message);
+	      console.log('receive message from agent', message);
 	      if (!handler) {
-	        console.warn("No handler found for event " + name);
+	        console.warn('No handler found for event ' + message.name);
 	        return;
 	      }
 	
 	      handler.call(this, message.data);
 	    }
 	  }], [{
-	    key: "sendData",
+	    key: 'sendData',
 	    value: function sendData() {
 	      console.log(document.body.className);
 	
-	      return sendMessage("sendData", document.documentElement.innerHTML);
+	      return sendMessage('sendData', document.documentElement.innerHTML);
 	    }
 	  }]);
 	

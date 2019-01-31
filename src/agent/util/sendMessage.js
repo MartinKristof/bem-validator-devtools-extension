@@ -2,7 +2,7 @@ const sendMessage = (name, data) => {
   window.postMessage(
     {
       source: 'bem-validator-agent',
-      name: name,
+      name,
       data: data || {},
     },
     '*',

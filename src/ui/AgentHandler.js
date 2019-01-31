@@ -2,9 +2,9 @@ import { processLint } from 'css-should-plugin-bem';
 import { parse } from 'css';
 import injectDebugger from './injectDebugger';
 
-var port = require('./port');
-var sendMessage = require('./util/sendMessage');
-var { extract } = require('./util/extractCss');
+const port = require('./port');
+const sendMessage = require('./util/sendMessage');
+const { extract } = require('./util/extractCss');
 
 class AgentHandler {
   constructor(flux) {
@@ -37,7 +37,7 @@ class AgentHandler {
 
     const handler = this.handlers[message.name];
     if (!handler) {
-      console.warn('No handler found for event ' + message.name);
+      console.warn(`No handler found for event ${message.name}`);
       return;
     }
 

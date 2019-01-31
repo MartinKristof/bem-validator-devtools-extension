@@ -1,6 +1,4 @@
-window.browser = (function() {
-  return window.msBrowser || window.browser || window.chrome;
-})();
+import '../browser';
 
 function handleError(error) {
   if (error.isError) {

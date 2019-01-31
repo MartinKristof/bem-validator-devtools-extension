@@ -1,8 +1,8 @@
-var port = require('../port');
+const port = require('../port');
 
 const sendMessage = (name, data) => {
   port.postMessage({
-    name: name,
+    name,
     tabId: browser.devtools.inspectedWindow.tabId,
     data: data || {},
   });
