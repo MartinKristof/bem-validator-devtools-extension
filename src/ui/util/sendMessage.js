@@ -3,7 +3,7 @@ var port = require('../port');
 const sendMessage = (name, data) => {
   port.postMessage({
     name: name,
-    tabId: chrome.devtools.inspectedWindow.tabId,
+    tabId: browser.devtools.inspectedWindow.tabId,
     data: data || {}
   });
 };

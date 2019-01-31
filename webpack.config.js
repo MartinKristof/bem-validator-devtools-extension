@@ -3,10 +3,12 @@ var createVendorChunk = require("webpack-create-vendor-chunk");
 module.exports = {
   target: "web",
   node: {
+    path: true,
+    url: false,
     dns: "mock",
     fs: "empty",
-    path: true,
-    url: false
+    net: 'empty',
+    tls: 'empty',
   },
   entry: {
     ui: "./src/ui/index.js",
@@ -14,7 +16,7 @@ module.exports = {
   },
   devtool: "source-map",
   output: {
-    path: "chrome-extension/build/",
+    path: "web-extension/build/",
     publicPath: "build",
     filename: "[name].bundle.js"
   },
@@ -36,13 +38,16 @@ module.exports = {
         test: /\.less$/,
         loader: "style-loader!css-loader!less-loader"
       },
-
       {
         test: /(?:\.woff2?$|\.ttf$|\.svg$|\.eot$)/,
         loader: "file-loader",
         query: {
           name: "/build/font/[hash].[ext]"
         }
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
   }

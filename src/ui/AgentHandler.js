@@ -1,8 +1,10 @@
-import { proccessLint } from "css-should-plugin-bem";
+import { processLint } from "css-should-plugin-bem";
 import { parse } from "css";
+import injectDebugger from "./injectDebugger";
 
 var port = require("./port");
 var sendMessage = require("./util/sendMessage");
+var { extract } = require("./util/extractCss");
 
 class AgentHandler {
   constructor(flux) {
@@ -14,50 +16,21 @@ class AgentHandler {
 
     this.handlers = {
       connected: () => sendMessage("getData"),
-      reloaded: () => sendMessage("getData"),
-      sendData: data => {
-        this.flux.actions.saveStyles(this.getStyles(data));
-      }
+      loading: () => this.flux.actions.loading(),
+      reloaded: () => injectDebugger(),
+      sendData: data =>
+        this.flux.actions.saveLintedRules(AgentHandler.getInvalidRules(data)),
+      errorOccurred: error => this.flux.actions.errorOccurred(error)
     };
   }
 
-  getStyles(data) {
-    const res = this.getRulesFromTargetLink(JSON.parse(data));
-
-    return Promise.all(res).then(e => [].concat(...e));
-  }
-
-  readUploadedFileAsText(inputFile) {
-    const temporaryFileReader = new FileReader();
-
-    return new Promise((resolve, reject) => {
-      temporaryFileReader.onerror = () => {
-        temporaryFileReader.abort();
-        reject(new Error("Problem parsing input file."));
-      };
-
-      temporaryFileReader.onload = () => {
-        resolve(temporaryFileReader.result);
-      };
-      temporaryFileReader.readAsText(inputFile);
+  static getInvalidRules(html) {
+    const classes = extract(html, {
+      extractClasses: true
     });
-  }
+    const parsedAst = parse(classes);
 
-  getRulesFromTargetLink(links) {
-    return links.filter(href => href).map(
-      href =>
-        new Promise((resolve, reject) => {
-          fetch(href)
-            .then(response => response.blob())
-            .then(blob => this.readUploadedFileAsText(blob))
-            .then(file => parse(file))
-            .then(css => proccessLint(css))
-            .then(missingClasses => resolve(missingClasses))
-            .catch(error => {
-              reject(error);
-            });
-        })
-    );
+    return processLint(parsedAst);
   }
 
   handleMessage(message) {

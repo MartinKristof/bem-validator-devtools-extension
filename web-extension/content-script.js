@@ -1,6 +1,11 @@
 /*
  * agent -> **content-script.js** -> background.js -> dev tools
  */
+
+window.browser = (function() {
+  return window.msBrowser || window.browser || window.chrome;
+})();
+
 window.addEventListener("message", function(event) {
   // Only accept messages from same frame
   if (event.source !== window) {
@@ -24,7 +29,7 @@ window.addEventListener("message", function(event) {
 /*
  * agent <- **content-script.js** <- background.js <- dev tools
  */
-chrome.runtime.onMessage.addListener(function(request) {
+browser.runtime.onMessage.addListener(function(request) {
   request.source = "bem-validator-devtools";
   window.postMessage(request, "*");
 });

@@ -5,28 +5,21 @@ class Agent {
     this.handlers = {
       // Broadcast when the dev tools are opened
       connect: () => sendMessage("connected"),
-      getData: () => Agent.sendData(),
+      error: error => sendMessage("errorOccurred", error),
+      getData: () => Agent.sendData()
     };
 
     this.initDevtoolsMessageListener();
   }
 
   static sendData() {
-      const hrefs = [];
-      const stylesheets = [...document.styleSheets];
+      console.log(document.body.className);
 
-      for (let stylesheet of stylesheets) {
-          const href = stylesheet.href;
-          hrefs.push(href);
-      }
-
-      return sendMessage("sendData", JSON.stringify(hrefs));
+    return sendMessage("sendData", document.documentElement.innerHTML);
   }
 
   initDevtoolsMessageListener() {
-    console.log("init Devtools");
     window.addEventListener("message", event => {
-      console.log("perform event from devtools", event);
       // Only accept messages from same frame
       if (event.source !== window) {
         return;

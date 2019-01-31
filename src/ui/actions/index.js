@@ -1,9 +1,19 @@
+import { inspect } from '../inspect';
+
 module.exports = {
-  saveStyles: function(styles) {
-    this.dispatch("saveStyles", styles);
+  saveLintedRules: function(rules) {
+    this.dispatch("saveLintedRules", rules);
   },
 
-  refresh: function() {
-    this.dispatch("refresh");
+  loading: function() {
+    this.dispatch("loading");
+  },
+
+  errorOccurred: function() {
+    this.dispatch("errorOccurred");
+  },
+
+  click: function(selector) {
+    inspect(selector)
   },
 };
