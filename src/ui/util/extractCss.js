@@ -7,19 +7,19 @@
  * Licensed under the MIT license.
  */
 (function(root, factory) {
-  if (typeof define === "function" && define.amd) {
+  if (typeof define === 'function' && define.amd) {
     define([], factory);
-  } else if (typeof module === "object" && module.exports) {
+  } else if (typeof module === 'object' && module.exports) {
     module.exports = factory();
   } else {
     root.extractCSS = factory();
   }
 })(this, function() {
-  "use strict";
+  'use strict';
 
   function getInlineStyle(element) {
-    if (element.hasAttribute("style")) {
-      return element.getAttribute("style");
+    if (element.hasAttribute('style')) {
+      return element.getAttribute('style');
     }
 
     return null;
@@ -32,26 +32,26 @@
 
     var classString = classes
       .trim()
-      .replace(/(\s{2,})/g, " ")
-      .split(" ")
-      .join(".");
+      .replace(/(\s{2,})/g, ' ')
+      .split(' ')
+      .join('.');
 
-    return "." + classString;
+    return '.' + classString;
   }
 
   function extractIds(input, outputArr) {
-    var elements = input.querySelectorAll("*[id]");
+    var elements = input.querySelectorAll('*[id]');
 
     Array.prototype.forEach.call(elements, function(element) {
-      var elementId = element.getAttribute("id");
+      var elementId = element.getAttribute('id');
 
-      if (elementId === null || elementId === "") {
+      if (elementId === null || elementId === '') {
         return;
       }
 
       outputArr.push({
-        selector: "#" + elementId,
-        style: getInlineStyle(element)
+        selector: '#' + elementId,
+        style: getInlineStyle(element),
       });
     });
 
@@ -59,17 +59,14 @@
   }
 
   function extractClasses(input, outputArr) {
-    var elements = input.querySelectorAll("*[class]"),
+    var elements = input.querySelectorAll('*[class]'),
       tmpArr = [];
 
     Array.prototype.forEach.call(elements, function(element) {
-      var elementClasses = element.getAttribute("class"),
+      var elementClasses = element.getAttribute('class'),
         elementClassString = buildClassString(elementClasses);
 
-      if (
-        tmpArr.indexOf(elementClassString) !== -1 ||
-        elementClasses === null
-      ) {
+      if (tmpArr.indexOf(elementClassString) !== -1 || elementClasses === null) {
         return;
       }
 
@@ -77,7 +74,7 @@
 
       outputArr.push({
         selector: elementClassString,
-        style: getInlineStyle(element)
+        style: getInlineStyle(element),
       });
     });
 
@@ -85,27 +82,20 @@
   }
 
   function extractStyles(input, outputArr) {
-    var elements = input.querySelectorAll("*[style]:not([id]):not([class])");
+    var elements = input.querySelectorAll('*[style]:not([id]):not([class])');
 
     Array.prototype.forEach.call(elements, function(element) {
       var parent = element.parentNode;
 
-      if (parent.hasAttribute("id")) {
+      if (parent.hasAttribute('id')) {
         outputArr.push({
-          selector:
-            "#" +
-            parent.getAttribute("id") +
-            " > " +
-            element.tagName.toLowerCase(),
-          style: getInlineStyle(element)
+          selector: '#' + parent.getAttribute('id') + ' > ' + element.tagName.toLowerCase(),
+          style: getInlineStyle(element),
         });
-      } else if (parent.hasAttribute("class")) {
+      } else if (parent.hasAttribute('class')) {
         outputArr.push({
-          selector:
-            buildClassString(parent.getAttribute("class")) +
-            " > " +
-            element.tagName.toLowerCase(),
-          style: getInlineStyle(element)
+          selector: buildClassString(parent.getAttribute('class')) + ' > ' + element.tagName.toLowerCase(),
+          style: getInlineStyle(element),
         });
       }
     });
@@ -115,11 +105,7 @@
 
   function outputCSS(extractStyle, outputArr, outputStr) {
     outputArr.forEach(function(elem) {
-      outputStr +=
-        elem.selector +
-        "{" +
-        (elem.style && extractStyle ? elem.style : "") +
-        "}";
+      outputStr += elem.selector + '{' + (elem.style && extractStyle ? elem.style : '') + '}';
     });
 
     return outputStr;
@@ -127,9 +113,9 @@
 
   function extract(input, options) {
     const outputArr = [];
-    let outputStr = "";
+    let outputStr = '';
 
-    var inputEl = document.createElement("div");
+    var inputEl = document.createElement('div');
     inputEl.innerHTML = input;
 
     options.extractAnonStyle && extractStyles(inputEl, outputArr);
@@ -143,6 +129,6 @@
     extract: extract,
     extractId: extractIds,
     extractClass: extractClasses,
-    extractStyle: extractStyles
+    extractStyle: extractStyles,
   };
 });

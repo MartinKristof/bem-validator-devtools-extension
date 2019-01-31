@@ -4,7 +4,7 @@ const sendMessage = (name, data) => {
   port.postMessage({
     name: name,
     tabId: browser.devtools.inspectedWindow.tabId,
-    data: data || {}
+    data: data || {},
   });
 };
 

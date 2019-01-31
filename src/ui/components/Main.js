@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react';
 
-var FluxMixin = require("fluxxor").FluxMixin(React);
-var StoreWatchMixin = require("fluxxor").StoreWatchMixin;
+var FluxMixin = require('fluxxor').FluxMixin(React);
+var StoreWatchMixin = require('fluxxor').StoreWatchMixin;
 
 const Main = React.createClass({
-  mixins: [FluxMixin, StoreWatchMixin("ConnectionStore")],
+  mixins: [FluxMixin, StoreWatchMixin('ConnectionStore')],
 
   getStateFromFlux() {
-    const store = this.getFlux().store("ConnectionStore");
+    const store = this.getFlux().store('ConnectionStore');
 
     return {
       rules: store.rules,
       isValid: store.isValid,
       isBemDetected: store.isBemDetected,
       loading: store.loading,
-      error: store.error
+      error: store.error,
     };
   },
 
@@ -31,57 +31,43 @@ const Main = React.createClass({
             <div className="panel-body">
               {!loading && error && <h4>Any error occured</h4>}
               {loading && <h4>Loading...</h4>}
-              {!loading &&
-                rules.length > 0 &&
-                !error &&
-                isBemDetected &&
-                !isValid && (
+              {!loading && rules.length > 0 && !error && isBemDetected && !isValid && (
+                <div>
                   <div>
-                    <div>
-                      <h4>Invalid rules:</h4>
-                      <table className="table-responsive table-striped text-center">
-                        <thead>
-                          <tr>
-                            <td>Missing class</td>
-                            <td>Selector</td>
+                    <h4>Invalid rules:</h4>
+                    <table className="table-responsive table-striped text-center">
+                      <thead>
+                        <tr>
+                          <td>Missing class</td>
+                          <td>Selector</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {rules.map(({ missingClassName, selector }, index) => (
+                          <tr key={`rulesList-${index}`} className="danger">
+                            <td>
+                              <strong>{missingClassName}</strong>
+                            </td>
+                            <td>
+                              <a onClick={() => this.getFlux().actions.click(selector)}>
+                                <em>{selector}</em>
+                              </a>
+                            </td>
                           </tr>
-                        </thead>
-                        <tbody>
-                          {rules.map(
-                            ({ missingClassName, selector }, index) => (
-                              <tr key={`rulesList-${index}`} className="danger">
-                                <td>
-                                  <strong>{missingClassName}</strong>
-                                </td>
-                                <td>
-                                  <a
-                                    onClick={() =>
-                                      this.getFlux().actions.click(selector)
-                                    }
-                                  >
-                                    <em>{selector}</em>
-                                  </a>
-                                </td>
-                              </tr>
-                            )
-                          )}
-                        </tbody>
-                      </table>
-                    </div>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
-                )}
-              {!loading && !error && isBemDetected && isValid && (
-                <h4>Valid! No BEM errors found!</h4>
+                </div>
               )}
-              {!loading && !error && !isBemDetected && !isValid && (
-                <h4>No BEM classes detected! Nothing to lint!</h4>
-              )}
+              {!loading && !error && isBemDetected && isValid && <h4>Valid! No BEM errors found!</h4>}
+              {!loading && !error && !isBemDetected && !isValid && <h4>No BEM classes detected! Nothing to lint!</h4>}
             </div>
           </div>
         </div>
       </div>
     );
-  }
+  },
 });
 
 export default Main;

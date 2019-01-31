@@ -1,5 +1,5 @@
-var ConnectionStore = require("./ConnectionStore");
+var ConnectionStore = require('./ConnectionStore');
 
 module.exports = {
-  ConnectionStore: new ConnectionStore()
+  ConnectionStore: new ConnectionStore(),
 };

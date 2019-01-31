@@ -16,7 +16,7 @@ function handleResult(result, err) {
   }
 }
 
-export const inspect = selector => {
+export const inspect = (selector) => {
   if (!selector) {
     return;
   }

@@ -13,10 +13,10 @@ browser.runtime.onMessage.addListener(function(request, sender) {
     if (tabId in connections) {
       connections[tabId].postMessage(request);
     } else {
-      console.log("Tab not found in connection list.");
+      console.log('Tab not found in connection list.');
     }
   } else {
-    console.log("sender.tab not defined.");
+    console.log('sender.tab not defined.');
   }
   return true;
 });
@@ -28,7 +28,7 @@ browser.runtime.onConnect.addListener(function(port) {
   // Listen to messages sent from the DevTools page
   port.onMessage.addListener(function(request) {
     // Register initial connection
-    if (request.name === "init") {
+    if (request.name === 'init') {
       connections[request.tabId] = port;
 
       port.onDisconnect.addListener(function() {
@@ -38,22 +38,22 @@ browser.runtime.onConnect.addListener(function(port) {
       return;
     }
 
-      // Otherwise, broadcast to agent
+    // Otherwise, broadcast to agent
     browser.tabs.sendMessage(request.tabId, {
       name: request.name,
-      data: request.data
+      data: request.data,
     });
   });
 });
 
 browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-  if (tabId in connections && changeInfo.status === "complete") {
+  if (tabId in connections && changeInfo.status === 'complete') {
     connections[tabId].postMessage({
-      name: "reloaded"
+      name: 'reloaded',
     });
-  } else if (tabId in connections && changeInfo.status === "loading") {
+  } else if (tabId in connections && changeInfo.status === 'loading') {
     connections[tabId].postMessage({
-      name: "loading"
+      name: 'loading',
     });
   }
 });

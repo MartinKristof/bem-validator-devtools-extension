@@ -1,4 +1,4 @@
-var sendMessage = require("./util/sendMessage");
+var sendMessage = require('./util/sendMessage');
 
 // thx https://github.com/emberjs/ember-inspector/blob/master/app/adapters/chrome.js
 var injectDebugger = function() {
@@ -11,25 +11,21 @@ var injectDebugger = function() {
       // script hasn't been injected yet
 
       var xhr = new XMLHttpRequest();
-      xhr.open(
-        "GET",
-        browser.extension.getURL("/build/agent.bundle.js"),
-        false
-      );
+      xhr.open('GET', browser.extension.getURL('/build/agent.bundle.js'), false);
       xhr.send();
       var script = xhr.responseText;
 
       browser.devtools.inspectedWindow.eval(script, function(result, err) {
         if (err) {
           console.error(err.value);
-          sendMessage("error", err.value);
+          sendMessage('error', err.value);
         }
 
-        sendMessage("connect");
+        sendMessage('connect');
       });
     } else {
       // we're already injected, so just connect
-      sendMessage("connect");
+      sendMessage('connect');
     }
   });
 };

@@ -5,7 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "dev": "webpack --watch"
+    "dev": "webpack --watch",
+    "pretty": "prettier --write '{src,style,web-extension}/**/*'",
+    "pretty:check": "prettier --list-different '{src,style,web-extension}/**/*'"
   },
   "author": "Martin Kristof",
   "license": "MIT",
@@ -21,6 +23,7 @@
     "json-loader": "^0.5.7",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "prettier": "^1.16.3",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
     "webpack-create-vendor-chunk": "^0.1.1"

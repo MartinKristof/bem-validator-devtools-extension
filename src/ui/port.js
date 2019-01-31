@@ -3,12 +3,12 @@ window.browser = (function() {
 })();
 
 const backgroundPageConnection = browser.runtime.connect({
-  name: "bem-validator-agent"
+  name: 'bem-validator-agent',
 });
 
 backgroundPageConnection.postMessage({
-  name: "init",
-  tabId: browser.devtools.inspectedWindow.tabId
+  name: 'init',
+  tabId: browser.devtools.inspectedWindow.tabId,
 });
 
 module.exports = backgroundPageConnection;

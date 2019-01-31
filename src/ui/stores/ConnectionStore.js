@@ -1,10 +1,10 @@
-var Fluxxor = require("fluxxor");
+var Fluxxor = require('fluxxor');
 
 var ConnectionStore = Fluxxor.createStore({
   actions: {
-    saveLintedRules: "onSaveLintedRules",
-    loading: "onLoading",
-    errorOccurred: "onErrorOccurred"
+    saveLintedRules: 'onSaveLintedRules',
+    loading: 'onLoading',
+    errorOccurred: 'onErrorOccurred',
   },
 
   initialize: function() {
@@ -14,7 +14,7 @@ var ConnectionStore = Fluxxor.createStore({
     this.isValid = false;
     this.isBemDetected = false;
 
-    this.emit("change");
+    this.emit('change');
   },
 
   onSaveLintedRules: function({ rules, isBemDetected, isValid }) {
@@ -23,7 +23,7 @@ var ConnectionStore = Fluxxor.createStore({
     this.isBemDetected = isBemDetected;
     this.isValid = isValid;
 
-    this.emit("change");
+    this.emit('change');
   },
 
   onLoading: function() {
@@ -33,7 +33,7 @@ var ConnectionStore = Fluxxor.createStore({
     this.isValid = false;
     this.error = null;
 
-    this.emit("change");
+    this.emit('change');
   },
 
   onErrorOccurred: function(error) {
@@ -43,8 +43,8 @@ var ConnectionStore = Fluxxor.createStore({
     this.isValid = false;
     this.error = error;
 
-    this.emit("change");
-  }
+    this.emit('change');
+  },
 });
 
 module.exports = ConnectionStore;
