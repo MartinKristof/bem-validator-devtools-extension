@@ -45,10 +45,6 @@ module.exports = {
           name: '/build/font/[hash].[ext]',
         },
       },
-      {
-        test: /\.json$/,
-        loader: 'json-loader',
-      },
     ],
   },
 };
