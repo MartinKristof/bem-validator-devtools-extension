@@ -1,14 +1,15 @@
 import { processLint } from 'css-should-plugin-bem';
 import { parse } from 'css';
 import injectDebugger from './injectDebugger';
+import { showError, showLoading, saveLintedRules } from './redux/actions';
 
 const port = require('./port');
 const sendMessage = require('./util/sendMessage');
 const { extract } = require('./util/extractCss');
 
 class AgentHandler {
-  constructor(flux) {
-    this.flux = flux;
+  constructor(store) {
+    this.store = store;
 
     port.onMessage.addListener((msg) => {
       this.handleMessage(msg);
@@ -16,20 +17,26 @@ class AgentHandler {
 
     this.handlers = {
       connected: () => sendMessage('getData'),
-      loading: () => this.flux.actions.loading(),
+      loading: () => this.store.dispatch(showLoading()),
       reloaded: () => injectDebugger(),
-      sendData: (data) => this.flux.actions.saveLintedRules(AgentHandler.getInvalidRules(data)),
-      errorOccurred: (error) => this.flux.actions.errorOccurred(error),
+      sendData: (data) => this.store.dispatch(saveLintedRules(this.getInvalidRules(data))),
+      showError: (error) => this.store.dispatch(showError(error)),
     };
   }
 
-  static getInvalidRules(html) {
-    const classes = extract(html, {
-      extractClasses: true,
-    });
-    const parsedAst = parse(classes);
+  getInvalidRules(html) {
+    try {
+      const classes = extract(html, {
+        extractClasses: true,
+      });
+      const parsedAst = parse(classes);
 
-    return processLint(parsedAst);
+      return processLint(parsedAst);
+    } catch (error) {
+      this.handlers.showError(error.message);
+
+      return {};
+    }
   }
 
   handleMessage(message) {

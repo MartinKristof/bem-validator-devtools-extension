@@ -4,8 +4,6 @@ const sendMessage = require('./util/sendMessage');
 
 // thx https://github.com/emberjs/ember-inspector/blob/master/app/adapters/chrome.js
 const injectDebugger = () => {
-  /* jshint evil: true */
-
   const injectedGlobal = 'window.__bem_agent_injected__';
 
   browser.devtools.inspectedWindow.eval(injectedGlobal, (result) => {
@@ -17,10 +15,9 @@ const injectDebugger = () => {
       xhr.send();
       const script = xhr.responseText;
 
-      browser.devtools.inspectedWindow.eval(script, (res, err) => {
-        if (err) {
-          console.error(err.value);
-          sendMessage('error', err.value);
+      browser.devtools.inspectedWindow.eval(script, (res, error) => {
+        if (error) {
+          sendMessage('error', error.message);
         }
 
         sendMessage('connect');

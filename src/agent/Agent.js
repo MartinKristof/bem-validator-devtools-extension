@@ -5,7 +5,7 @@ class Agent {
     this.handlers = {
       // Broadcast when the dev tools are opened
       connect: () => sendMessage('connected'),
-      error: (error) => sendMessage('errorOccurred', error),
+      error: (error) => sendMessage('showError', error),
       getData: () => Agent.sendData(),
     };
 

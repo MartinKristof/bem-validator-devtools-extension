@@ -1,5 +1,7 @@
 import '../browser';
 
+const sendMessage = require('./util/sendMessage');
+
 export const inspect = (selector) => {
   if (!selector) {
     return;
@@ -10,6 +12,6 @@ export const inspect = (selector) => {
   try {
     browser.devtools.inspectedWindow.eval(inspectString);
   } catch (error) {
-    console.error(error);
+    sendMessage('error', error.message);
   }
 };
