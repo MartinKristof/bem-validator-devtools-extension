@@ -1,49 +1,50 @@
-var createVendorChunk = require("webpack-create-vendor-chunk");
+const createVendorChunk = require('webpack-create-vendor-chunk');
 
 module.exports = {
-  target: "web",
+  target: 'web',
   node: {
-    dns: "mock",
-    fs: "empty",
     path: true,
-    url: false
+    url: false,
+    dns: 'mock',
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
   },
   entry: {
-    ui: "./src/ui/index.js",
-    agent: "./src/agent/index.js"
+    ui: './src/ui/index.js',
+    agent: './src/agent/index.js',
   },
-  devtool: "source-map",
+  devtool: 'source-map',
   output: {
-    path: "chrome-extension/build/",
-    publicPath: "build",
-    filename: "[name].bundle.js"
+    path: 'web-extension/build/',
+    publicPath: 'build',
+    filename: '[name].bundle.js',
   },
   plugins: [
     createVendorChunk({
-      name: "vendor",
-      chunks: ["ui"]
-    })
+      name: 'vendor',
+      chunks: ['ui'],
+    }),
   ],
   module: {
     loaders: [
       {
         test: /\.js$/,
-        loader: "babel",
-        exclude: /node_modules/
+        loader: 'babel',
+        exclude: /node_modules/,
       },
 
       {
-        test: /\.less$/,
-        loader: "style-loader!css-loader!less-loader"
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader',
       },
-
       {
         test: /(?:\.woff2?$|\.ttf$|\.svg$|\.eot$)/,
-        loader: "file-loader",
+        loader: 'file-loader',
         query: {
-          name: "/build/font/[hash].[ext]"
-        }
-      }
-    ]
-  }
+          name: '/build/font/[hash].[ext]',
+        },
+      },
+    ],
+  },
 };

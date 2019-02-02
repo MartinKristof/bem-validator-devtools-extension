@@ -1,10 +1,12 @@
-const backgroundPageConnection = chrome.runtime.connect({
-  name: 'panel'
+import '../browser';
+
+const backgroundPageConnection = browser.runtime.connect({
+  name: 'bem-validator-agent',
 });
 
 backgroundPageConnection.postMessage({
   name: 'init',
-  tabId: chrome.devtools.inspectedWindow.tabId
+  tabId: browser.devtools.inspectedWindow.tabId,
 });
 
 module.exports = backgroundPageConnection;

@@ -1,21 +1,25 @@
+/* eslint-disable no-new */
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import AgentHandler from './AgentHandler';
-import React from "react";
-import ReactDOM from "react-dom";
-import Main from './components/Main';
+import injectDebugger from './injectDebugger';
+import Validator from './redux/components';
+import rootReducer from './redux/store';
+import '../../style/main.scss';
 
-require('../../style/main.less');
+const store = createStore(rootReducer);
 
-var injectDebugger = require('./injectDebugger');
-var Flux = require('fluxxor').Flux;
-var actions = require('./actions');
-var stores = require('./stores');
-
-var flux = new Flux(stores, actions);
-
-var agentHandler = new AgentHandler(flux);
+new AgentHandler(store);
 
 injectDebugger();
 
-window.addEventListener('load', function() {
-  ReactDOM.render(<Main flux={flux} />, document.getElementById('container'));
+window.addEventListener('load', () => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <Validator />
+    </Provider>,
+    document.getElementById('container'),
+  );
 });

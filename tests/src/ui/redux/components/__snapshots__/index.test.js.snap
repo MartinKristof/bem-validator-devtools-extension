@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<index /> #render should render without side-effects 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(Validator)>
+    <Validator
+      error={null}
+      inspectElement={[Function]}
+      isBemDetected={false}
+      isValid={false}
+      loading={true}
+      rules={Array []}
+    >
+      <Container
+        className="text-center"
+        tag="div"
+      >
+        <div
+          className="text-center container"
+        >
+          <Row
+            className="my-4"
+            tag="div"
+          >
+            <div
+              className="my-4 row"
+            >
+              <Col
+                tag="div"
+                widths={
+                  Array [
+                    "xs",
+                    "sm",
+                    "md",
+                    "lg",
+                    "xl",
+                  ]
+                }
+              >
+                <div
+                  className="col"
+                >
+                  <Heading>
+                    <div>
+                      <h4>
+                        Loading...
+                      </h4>
+                    </div>
+                  </Heading>
+                  <Icon
+                    kind="loader"
+                    size={64}
+                  >
+                    <svg
+                      height={64}
+                      kind="loader"
+                      viewBox="0 0 50 50"
+                      width={64}
+                    >
+                      <path
+                        d="M25.251 6.461c-10.318 0-18.683 8.365-18.683 18.683h4.068c0-8.071 6.543-14.615 14.615-14.615V6.461z"
+                      >
+                        <animateTransform
+                          attributeName="transform"
+                          attributeType="xml"
+                          dur="0.6s"
+                          from="0 25 25"
+                          repeatCount="indefinite"
+                          to="360 25 25"
+                          type="rotate"
+                        />
+                      </path>
+                    </svg>
+                  </Icon>
+                </div>
+              </Col>
+            </div>
+          </Row>
+        </div>
+      </Container>
+    </Validator>
+  </Connect(Validator)>
+</Provider>
+`;

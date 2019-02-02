@@ -1,2 +1,4 @@
 node_modules/
-chrome-extension/build/
+yarn-error.log
+web-extension/build
+coverage/

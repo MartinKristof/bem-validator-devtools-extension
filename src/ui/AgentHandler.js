@@ -1,71 +1,47 @@
-import { proccessLint } from "css-should-plugin-bem";
-import { parse } from "css";
-
-var port = require("./port");
-var sendMessage = require("./util/sendMessage");
+/* eslint-disable no-console */
+import { processLint } from 'css-should-plugin-bem';
+import { parse } from 'css';
+import injectDebugger from './injectDebugger';
+import { showError, showLoading, saveLintedRules } from './redux/actions';
+import port from './port';
+import sendMessage from './util/sendMessage';
+import { extract } from './util/extractCss';
 
 class AgentHandler {
-  constructor(flux) {
-    this.flux = flux;
+  constructor(store) {
+    this.store = store;
 
-    port.onMessage.addListener(msg => {
-      this.handleMessage(msg);
+    port.onMessage.addListener((message) => {
+      this.handleMessage(message);
     });
 
     this.handlers = {
-      connected: () => sendMessage("getData"),
-      reloaded: () => sendMessage("getData"),
-      sendData: data => {
-        this.flux.actions.saveStyles(this.getStyles(data));
-      }
+      connected: () => sendMessage('getData'),
+      loading: () => this.store.dispatch(showLoading()),
+      reloaded: () => injectDebugger(),
+      sendData: ({ html, bodyClass }) => this.store.dispatch(saveLintedRules(this.getInvalidRules(html, bodyClass))),
+      showError: (error) => this.store.dispatch(showError(error)),
     };
   }
 
-  getStyles(data) {
-    const res = this.getRulesFromTargetLink(JSON.parse(data));
+  getInvalidRules(html, bodyClass) {
+    try {
+      const classes = extract(html, bodyClass);
+      const parsedAst = parse(classes);
 
-    return Promise.all(res).then(e => [].concat(...e));
-  }
+      return processLint(parsedAst);
+    } catch (error) {
+      this.handlers.showError(error.message);
 
-  readUploadedFileAsText(inputFile) {
-    const temporaryFileReader = new FileReader();
-
-    return new Promise((resolve, reject) => {
-      temporaryFileReader.onerror = () => {
-        temporaryFileReader.abort();
-        reject(new Error("Problem parsing input file."));
-      };
-
-      temporaryFileReader.onload = () => {
-        resolve(temporaryFileReader.result);
-      };
-      temporaryFileReader.readAsText(inputFile);
-    });
-  }
-
-  getRulesFromTargetLink(links) {
-    return links.filter(href => href).map(
-      href =>
-        new Promise((resolve, reject) => {
-          fetch(href)
-            .then(response => response.blob())
-            .then(blob => this.readUploadedFileAsText(blob))
-            .then(file => parse(file))
-            .then(css => proccessLint(css))
-            .then(missingClasses => resolve(missingClasses))
-            .catch(error => {
-              reject(error);
-            });
-        })
-    );
+      return {};
+    }
   }
 
   handleMessage(message) {
-    console.log("handle message in agent handler", message);
-
     const handler = this.handlers[message.name];
+
     if (!handler) {
-      console.warn("No handler found for event " + message.name);
+      console.warn(`No handler found for event ${message.name}`);
       return;
     }
 
