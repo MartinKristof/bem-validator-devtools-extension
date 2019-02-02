@@ -1,4 +1,5 @@
-const sendMessage = require('./util/sendMessage');
+/* eslint-disable no-console */
+import sendMessage from './util/sendMessage';
 
 class Agent {
   constructor() {
@@ -13,9 +14,7 @@ class Agent {
   }
 
   static sendData() {
-    console.log(document.body.className);
-
-    return sendMessage('sendData', document.documentElement.innerHTML);
+    return sendMessage('sendData', { html: document.documentElement.innerHTML, bodyClass: document.body.className });
   }
 
   initDevtoolsMessageListener() {
@@ -38,7 +37,7 @@ class Agent {
 
   handleMessage(message) {
     const handler = this.handlers[message.name];
-    console.log('receive message from agent', message);
+
     if (!handler) {
       console.warn(`No handler found for event ${message.name}`);
       return;

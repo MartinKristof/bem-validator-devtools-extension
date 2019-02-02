@@ -1,0 +1,226 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Validator /> #render should render if BEM is not detected 1`] = `
+<Container
+  className="text-center"
+  tag="div"
+>
+  <Row
+    className="my-4"
+    tag="div"
+  >
+    <Col
+      tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      <Heading>
+        No BEM classes detected!
+      </Heading>
+      <Icon
+        kind="unknown"
+        size={64}
+      />
+      <p
+        className="secondary"
+      >
+        Nothing to lint!
+      </p>
+    </Col>
+  </Row>
+</Container>
+`;
+
+exports[`<Validator /> #render should render if error 1`] = `
+<Container
+  className="text-center"
+  tag="div"
+>
+  <Row
+    className="my-4"
+    tag="div"
+  >
+    <Col
+      tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      <Heading>
+        Any error occured!
+      </Heading>
+      <Icon
+        kind="error"
+        size={64}
+      />
+      <p
+        className="secondary"
+      >
+        Error
+      </p>
+    </Col>
+  </Row>
+</Container>
+`;
+
+exports[`<Validator /> #render should render if loading 1`] = `
+<Container
+  className="text-center"
+  tag="div"
+>
+  <Row
+    className="my-4"
+    tag="div"
+  >
+    <Col
+      tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      <Heading>
+        Loading...
+      </Heading>
+      <Icon
+        kind="loader"
+        size={64}
+      />
+    </Col>
+  </Row>
+</Container>
+`;
+
+exports[`<Validator /> #render should render if rules are invalid according BEM 1`] = `
+<Container
+  className="text-center"
+  tag="div"
+>
+  <Row
+    className="my-4"
+    tag="div"
+  >
+    <Col
+      tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      <div>
+        <Heading>
+          Invalid!
+        </Heading>
+        <div>
+          <Icon
+            kind="invalid"
+            size={64}
+          />
+          <p
+            className="error"
+          >
+            BEM errors found!
+          </p>
+        </div>
+        <Table
+          responsive={true}
+          responsiveTag="div"
+          striped={true}
+          tag="table"
+        >
+          <thead>
+            <tr>
+              <td>
+                Missing class
+              </td>
+              <td>
+                Selector
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <RulesList
+              inspectElement={[MockFunction]}
+              rules={
+                Array [
+                  Object {
+                    "missingClassName": ".foo",
+                    "selector": ".bar",
+                  },
+                  Object {
+                    "missingClassName": ".boo",
+                    "selector": ".bazz",
+                  },
+                ]
+              }
+            />
+          </tbody>
+        </Table>
+      </div>
+    </Col>
+  </Row>
+</Container>
+`;
+
+exports[`<Validator /> #render should render if rules are valid according BEM 1`] = `
+<Container
+  className="text-center"
+  tag="div"
+>
+  <Row
+    className="my-4"
+    tag="div"
+  >
+    <Col
+      tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      <Heading>
+        Valid!
+      </Heading>
+      <div>
+        <Icon
+          kind="valid"
+          size={64}
+        />
+        <p
+          className="success"
+        >
+          No BEM errors found!
+        </p>
+      </div>
+    </Col>
+  </Row>
+</Container>
+`;

@@ -1,4 +1,4 @@
-const port = require('../port');
+import port from '../port';
 
 const sendMessage = (name, data) =>
   port.postMessage({

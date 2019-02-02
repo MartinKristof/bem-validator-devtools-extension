@@ -1,34 +1,32 @@
+/* eslint-disable no-console */
 import { processLint } from 'css-should-plugin-bem';
 import { parse } from 'css';
 import injectDebugger from './injectDebugger';
 import { showError, showLoading, saveLintedRules } from './redux/actions';
-
-const port = require('./port');
-const sendMessage = require('./util/sendMessage');
-const { extract } = require('./util/extractCss');
+import port from './port';
+import sendMessage from './util/sendMessage';
+import { extract } from './util/extractCss';
 
 class AgentHandler {
   constructor(store) {
     this.store = store;
 
-    port.onMessage.addListener((msg) => {
-      this.handleMessage(msg);
+    port.onMessage.addListener((message) => {
+      this.handleMessage(message);
     });
 
     this.handlers = {
       connected: () => sendMessage('getData'),
       loading: () => this.store.dispatch(showLoading()),
       reloaded: () => injectDebugger(),
-      sendData: (data) => this.store.dispatch(saveLintedRules(this.getInvalidRules(data))),
+      sendData: ({ html, bodyClass }) => this.store.dispatch(saveLintedRules(this.getInvalidRules(html, bodyClass))),
       showError: (error) => this.store.dispatch(showError(error)),
     };
   }
 
-  getInvalidRules(html) {
+  getInvalidRules(html, bodyClass) {
     try {
-      const classes = extract(html, {
-        extractClasses: true,
-      });
+      const classes = extract(html, bodyClass);
       const parsedAst = parse(classes);
 
       return processLint(parsedAst);
@@ -40,9 +38,8 @@ class AgentHandler {
   }
 
   handleMessage(message) {
-    console.log('handle message in agent handler', message);
-
     const handler = this.handlers[message.name];
+
     if (!handler) {
       console.warn(`No handler found for event ${message.name}`);
       return;

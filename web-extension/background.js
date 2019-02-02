@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const connections = {};
 
 window.browser = (() => window.msBrowser || window.browser || window.chrome)();

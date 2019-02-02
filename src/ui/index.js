@@ -5,7 +5,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import AgentHandler from './AgentHandler';
 import injectDebugger from './injectDebugger';
-import Validator from './redux/index';
+import Validator from './redux/components';
 import rootReducer from './redux/store';
 import '../../style/main.scss';
 

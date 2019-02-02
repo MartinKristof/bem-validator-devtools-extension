@@ -1,4 +1,4 @@
-const sendMessage = (name, data) => {
+const sendMessage = (name, data) =>
   window.postMessage(
     {
       source: 'bem-validator-agent',
@@ -7,6 +7,5 @@ const sendMessage = (name, data) => {
     },
     '*',
   );
-};
 
 module.exports = sendMessage;

@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Validator from './components/Validator';
-import { inspectElement } from './actions';
+import Validator from './Validator';
+import { inspectElement } from '../actions';
 
 const mapStateToProps = ({ state }) => ({
   ...state,

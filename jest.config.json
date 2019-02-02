@@ -1,6 +1,6 @@
 {
   "automock": false,
-  "setupFiles": ["<rootDir>/jest.setup.js"],
+  "setupFiles": ["<rootDir>/jest.setup.js", "jest-webextension-mock"],
   "testPathIgnorePatterns": ["<rootDir>/node_modules/"],
   "snapshotSerializers": ["enzyme-to-json/serializer"],
   "moduleDirectories": ["node_modules"],

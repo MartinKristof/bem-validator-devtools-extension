@@ -1,6 +1,5 @@
+/* eslint-disable global-require */
 import '../browser';
-
-const sendMessage = require('./util/sendMessage');
 
 export const inspect = (selector) => {
   if (!selector) {
@@ -12,6 +11,8 @@ export const inspect = (selector) => {
   try {
     browser.devtools.inspectedWindow.eval(inspectString);
   } catch (error) {
+    const sendMessage = require('./util/sendMessage');
+
     sendMessage('error', error.message);
   }
 };

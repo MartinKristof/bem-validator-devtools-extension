@@ -1,5 +1,7 @@
 /* eslint-disable no-param-reassign */
 /**
+ * Modified
+ *
  * extractcss.js
  * https://github.com/adnantopal/extractcss
  * http://extractcss.com/
@@ -29,26 +31,7 @@ const buildClassString = (classes) => {
   return `.${classString}`;
 };
 
-export const extractIds = (input, outputArr) => {
-  const elements = input.querySelectorAll('*[id]');
-
-  Array.prototype.forEach.call(elements, (element) => {
-    const elementId = element.getAttribute('id');
-
-    if (elementId === null || elementId === '') {
-      return;
-    }
-
-    outputArr.push({
-      selector: `#${elementId}`,
-      style: getInlineStyle(element),
-    });
-  });
-
-  return outputArr;
-};
-
-export const extractClasses = (input, outputArr) => {
+const extractClasses = (input, outputArr) => {
   const elements = input.querySelectorAll('*[class]');
 
   const tmpArr = [];
@@ -73,54 +56,27 @@ export const extractClasses = (input, outputArr) => {
   return outputArr;
 };
 
-export const extractStyles = (input, outputArr) => {
-  const elements = input.querySelectorAll('*[style]:not([id]):not([class])');
-
-  Array.prototype.forEach.call(elements, (element) => {
-    const parent = element.parentNode;
-
-    if (parent.hasAttribute('id')) {
-      outputArr.push({
-        selector: `#${parent.getAttribute('id')} > ${element.tagName.toLowerCase()}`,
-        style: getInlineStyle(element),
-      });
-    } else if (parent.hasAttribute('class')) {
-      outputArr.push({
-        selector: `${buildClassString(parent.getAttribute('class'))} > ${element.tagName.toLowerCase()}`,
-        style: getInlineStyle(element),
-      });
-    }
-  });
-
-  return outputArr;
-};
-
-const outputCSS = (extractStyle, outputArr, outputStr) => {
+const outputCSS = (outputArr, outputStr) => {
   outputArr.forEach((elem) => {
-    outputStr += `${elem.selector}{${elem.style && extractStyle ? elem.style : ''}}`;
+    outputStr += `${elem.selector}{${elem.style ? elem.style : ''}}`;
   });
 
   return outputStr;
 };
 
-export const extract = (input, options) => {
+export const extract = (input, bodyClass) => {
   const outputArr = [];
   const outputStr = '';
 
+  let bodyClassName;
+
+  if (bodyClass) {
+    bodyClassName = `<div class="${bodyClass}"></div>`;
+  }
   const inputEl = document.createElement('div');
-  inputEl.innerHTML = input;
+  inputEl.innerHTML = bodyClass ? bodyClassName + input : input;
 
-  if (options.extractAnonStyle) {
-    extractStyles(inputEl, outputArr);
-  }
+  extractClasses(inputEl, outputArr);
 
-  if (options.extractIds) {
-    extractIds(inputEl, outputArr);
-  }
-
-  if (options.extractClasses) {
-    extractClasses(inputEl, outputArr);
-  }
-
-  return outputCSS(options.extractStyle, outputArr, outputStr);
+  return outputCSS(outputArr, outputStr);
 };

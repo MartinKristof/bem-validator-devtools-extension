@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RulesList /> #render should render without side-effects 1`] = `
+Array [
+  <RulesItem
+    inspectElement={[Function]}
+    key="1"
+    rule={
+      Object {
+        "missingClassName": ".foo",
+        "selector": ".bar",
+      }
+    }
+  />,
+  <RulesItem
+    inspectElement={[Function]}
+    key="2"
+    rule={
+      Object {
+        "missingClassName": ".boo",
+        "selector": ".bazz",
+      }
+    }
+  />,
+]
+`;

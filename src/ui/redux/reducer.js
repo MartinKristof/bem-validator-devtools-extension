@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
     case ACTION_SHOW_ERROR:
       return { ...state, error: action.error };
     case ACTION_SHOW_LOADING:
-      return initialState;
+      return { ...state, loading: true };
     default:
       return state;
   }
