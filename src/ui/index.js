@@ -7,7 +7,7 @@ import AgentHandler from './AgentHandler';
 import injectDebugger from './injectDebugger';
 import Validator from './redux/index';
 import rootReducer from './redux/store';
-import '../../style/main.less';
+import '../../style/main.scss';
 
 const store = createStore(rootReducer);
 

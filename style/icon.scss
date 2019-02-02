@@ -6,15 +6,18 @@ svg {
 .path {
   stroke-dasharray: 1000;
   stroke-dashoffset: 0;
+
   &.circle {
     -webkit-animation: dash 0.9s ease-in-out;
     animation: dash 0.9s ease-in-out;
   }
+
   &.line {
     stroke-dashoffset: 1000;
     -webkit-animation: dash 0.9s 0.35s ease-in-out forwards;
     animation: dash 0.9s 0.35s ease-in-out forwards;
   }
+
   &.check {
     stroke-dashoffset: -100;
     -webkit-animation: dash-check 0.9s 0.35s ease-in-out forwards;
@@ -26,12 +29,15 @@ p {
   text-align: center;
   margin: 20px;
   font-size: 1.25em;
+
   &.success {
     color: #73af55;
   }
+
   &.error {
     color: #d06079;
   }
+
   &.secondary {
     color: #857f7f;
   }
@@ -41,6 +47,7 @@ p {
   0% {
     stroke-dashoffset: 1000;
   }
+
   100% {
     stroke-dashoffset: 0;
   }
@@ -50,6 +57,7 @@ p {
   0% {
     stroke-dashoffset: 1000;
   }
+
   100% {
     stroke-dashoffset: 0;
   }
@@ -59,6 +67,7 @@ p {
   0% {
     stroke-dashoffset: -100;
   }
+
   100% {
     stroke-dashoffset: 900;
   }
@@ -68,6 +77,7 @@ p {
   0% {
     stroke-dashoffset: -100;
   }
+
   100% {
     stroke-dashoffset: 900;
   }

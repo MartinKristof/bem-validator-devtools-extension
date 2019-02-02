@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const RulesItem = ({ rule: { missingClassName, selector }, inspectElement }) => (
-  <tr className="rules__item">
+  <tr>
     <td>
       <strong>{missingClassName}</strong>
     </td>
     <td>
-      <a href="#" className="rules__item-link" onClick={() => inspectElement(selector)}>
+      <a href="#" onClick={() => inspectElement(selector)}>
         <em>{selector}</em>
       </a>
     </td>

@@ -167,7 +167,7 @@ class Icon extends Component {
               cy="65.1"
               r="62.1"
             />
-            <text fill="none" fontSize="64px" stroke="#857F7F" strokeWidth="6" x="49.1" y="85.1">
+            <text fill="#857F7F" fontSize="64px" stroke="#857F7F" strokeWidth="2" x="48" y="85">
               ?
             </text>
           </svg>
@@ -193,7 +193,7 @@ class Icon extends Component {
               cy="65.1"
               r="62.1"
             />
-            <text fill="none" fontSize="64px" stroke="#857F7F" strokeWidth="6" x="57.1" y="85.1">
+            <text fill="#857F7F" fontSize="64px" stroke="#857F7F" strokeWidth="2" x="57" y="85">
               !
             </text>
           </svg>

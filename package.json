@@ -10,9 +10,9 @@
     "pretty:check": "prettier --list-different '{src,style,web-extension}/**/*'",
     "lint": "run-s lint:scripts lint:styles",
     "lint:scripts": "eslint src/ web-extension/",
-    "lint:styles": "stylelint '**/*.less'",
+    "lint:styles": "stylelint '**/*.scss'",
     "fix:scripts": "eslint src/ web-extension/ --fix",
-    "fix:styles": "stylelint '**/*.less' --fix",
+    "fix:styles": "stylelint '**/*.scss' --fix",
     "generate-icons": "svg-icon-generate --svgDir ./assets/svg --destination ./src/ui/redux/components/icons/Icon.js --keepFillColor true --reactPureRender true"
   },
   "author": "Martin Kristof",
@@ -26,7 +26,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
-    "bootstrap": "^3.3.6",
+    "bootstrap": "^4.2.1",
     "css-loader": "^0.23.1",
     "eslint": "^5.12.1",
     "eslint-config-airbnb": "^17.1.0",
@@ -40,9 +40,13 @@
     "json-loader": "^0.5.7",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "node-sass": "^4.11.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.16.3",
+    "sass-loader": "^7.1.0",
     "style-loader": "^0.13.1",
+    "stylelint": "^9.10.1",
+    "stylelint-scss": "^3.5.2",
     "webpack": "^1.13.1",
     "webpack-create-vendor-chunk": "^0.1.1"
   },
@@ -57,6 +61,7 @@
     "react-dom": "^16.3.3",
     "react-redux": "^6.0.0",
     "react-svg-icon-generator": "^0.5.1",
+    "reactstrap": "^7.1.0",
     "redux": "^4.0.1",
     "uuid": "~2.0.1"
   }

@@ -2,7 +2,7 @@
     <circle
             class="path circle"
             fill="none"
-            stroke="#857F7F"
+            stroke="black"
             stroke-width="6"
             stroke-miterlimit="10"
             cx="65.1"
@@ -11,13 +11,13 @@
     />
     <text
             class="path check"
-            fill="#857F7F"
-            font-size="64px"
-            stroke="#857F7F"
+            fill="black"
+            font-size="34px"
+            stroke="black"
             stroke-width="2"
-            x="48"
-            y="85"
+            x="29"
+            y="75"
     >
-        ?
+        BEM
     </text>
 </svg>

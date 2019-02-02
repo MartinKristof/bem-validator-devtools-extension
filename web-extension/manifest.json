@@ -10,6 +10,10 @@
     "scripts": ["background.js"],
     "persistent": false
   },
+  "icons": {
+    "48": "icon.svg",
+    "96": "icon.svg"
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],

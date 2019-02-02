@@ -11,12 +11,12 @@
     />
     <text
             class="path check"
-            fill="none"
+            fill="#857F7F"
             font-size="64px"
             stroke="#857F7F"
-            stroke-width="6"
-            x="57.1"
-            y="85.1"
+            stroke-width="2"
+            x="57"
+            y="85"
     >
         !
     </text>
