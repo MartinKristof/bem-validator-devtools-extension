@@ -1,0 +1,21 @@
+{
+  "automock": false,
+  "setupFiles": ["<rootDir>/jest.setup.js"],
+  "testPathIgnorePatterns": ["<rootDir>/node_modules/"],
+  "snapshotSerializers": ["enzyme-to-json/serializer"],
+  "moduleDirectories": ["node_modules"],
+  "moduleNameMapper": {
+    ".scss$": "<rootDir>/tests/stubs/sassStub.js"
+  },
+  "reporters": [
+    "default",
+    [
+      "jest-junit",
+      {
+        "suiteName": "jest tests",
+        "output": "./coverage/junit.xml"
+      }
+    ]
+  ],
+  "verbose": false
+}

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RulesItem /> #render should render without side-effects 1`] = `
+<tr>
+  <td>
+    <strong>
+      .foo
+    </strong>
+  </td>
+  <td>
+    <a
+      href="#"
+      onClick={[Function]}
+    >
+      <em>
+        .bar
+      </em>
+    </a>
+  </td>
+</tr>
+`;

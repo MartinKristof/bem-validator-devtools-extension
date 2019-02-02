@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Heading /> #render should render without side-effects 1`] = `
+<div>
+  <h4>
+    Foo
+  </h4>
+</div>
+`;
