@@ -22,6 +22,10 @@ Under MIT Licence.
 
 - `yarn build` or `npm run build`
 
+## Build
+
+- `yarn web-ext:build` or `npm run web-ext:build`
+
 ## Scripts
 
 You can use both `yarn` or `npm run` to control application flow.
@@ -43,3 +47,4 @@ You can use both `yarn` or `npm run` to control application flow.
 - `pretty` - Runs prettyfying of code.
 - `pretty:check` - Run code check with prettier.
 - `generate-icons` - Generate React component from SVGs.
+- `web-ext:build` - Build zip file with extension to install on browser.
