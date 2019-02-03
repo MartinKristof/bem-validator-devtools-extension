@@ -15,7 +15,7 @@ exports[`<index /> #render should render without side-effects 1`] = `
 >
   <Connect(Validator)>
     <Validator
-      error={null}
+      error=""
       inspectElement={[Function]}
       isBemDetected={false}
       isValid={false}

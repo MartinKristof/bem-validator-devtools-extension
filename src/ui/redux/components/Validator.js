@@ -68,7 +68,7 @@ Validator.propTypes = {
     PropTypes.exact({ missingClassName: PropTypes.string.isRequired, selector: PropTypes.string.isRequired }),
   ).isRequired,
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.string,
+  error: PropTypes.string.isRequired,
   isBemDetected: PropTypes.bool.isRequired,
   isValid: PropTypes.bool.isRequired,
   inspectElement: PropTypes.func.isRequired,

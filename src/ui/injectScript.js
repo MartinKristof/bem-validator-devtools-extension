@@ -1,7 +1,7 @@
 import '../browser';
 import sendMessage from './util/sendMessage';
 
-const injectDebugger = () => {
+const injectScript = () => {
   const injectedGlobal = 'window.__bem_agent_injected__';
 
   browser.devtools.inspectedWindow.eval(injectedGlobal, (result) => {
@@ -26,4 +26,4 @@ const injectDebugger = () => {
   });
 };
 
-module.exports = injectDebugger;
+module.exports = injectScript;

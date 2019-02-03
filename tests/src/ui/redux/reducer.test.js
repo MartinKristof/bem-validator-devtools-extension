@@ -4,7 +4,7 @@ import { ACTION_SAVE_LINTED_RULES, ACTION_SHOW_ERROR, ACTION_SHOW_LOADING } from
 describe('reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual({
-      error: null,
+      error: '',
       isBemDetected: false,
       isValid: false,
       loading: true,

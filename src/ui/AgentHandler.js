@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { processLint } from 'css-should-plugin-bem';
 import { parse } from 'css';
-import injectDebugger from './injectDebugger';
+import injectScript from './injectScript';
 import { showError, showLoading, saveLintedRules } from './redux/actions';
 import port from './port';
 import sendMessage from './util/sendMessage';
@@ -18,7 +18,7 @@ class AgentHandler {
     this.handlers = {
       connected: () => sendMessage('getData'),
       loading: () => this.store.dispatch(showLoading()),
-      reloaded: () => injectDebugger(),
+      reloaded: () => injectScript(),
       sendData: ({ html, bodyClass }) => this.store.dispatch(saveLintedRules(this.getInvalidRules(html, bodyClass))),
       showError: (error) => this.store.dispatch(showError(error)),
     };

@@ -1,7 +1,7 @@
 const stateRecord = {
   rules: [],
   loading: true,
-  error: null,
+  error: '',
   isValid: false,
   isBemDetected: false,
 };

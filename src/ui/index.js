@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import AgentHandler from './AgentHandler';
-import injectDebugger from './injectDebugger';
+import injectScript from './injectScript';
 import Validator from './redux/components';
 import rootReducer from './redux/store';
 import '../../style/main.scss';
@@ -13,7 +13,7 @@ const store = createStore(rootReducer);
 
 new AgentHandler(store);
 
-injectDebugger();
+injectScript();
 
 window.addEventListener('load', () => {
   ReactDOM.render(

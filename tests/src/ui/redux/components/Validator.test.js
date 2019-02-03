@@ -8,7 +8,7 @@ describe('<Validator />', () => {
   describe('#render', () => {
     it('should render if rules are valid according BEM', () => {
       const node = shallow(
-        <Validator rules={[]} isBemDetected isValid loading={false} inspectElement={inspectElement} error={null} />,
+        <Validator rules={[]} isBemDetected isValid loading={false} inspectElement={inspectElement} error="" />,
       );
 
       expect(node).toMatchSnapshot();
@@ -24,7 +24,7 @@ describe('<Validator />', () => {
           isValid={false}
           loading={false}
           inspectElement={inspectElement}
-          error={null}
+          error=""
         />,
       );
 
@@ -39,7 +39,7 @@ describe('<Validator />', () => {
           isValid={false}
           loading={false}
           inspectElement={inspectElement}
-          error={null}
+          error=""
         />,
       );
 
@@ -48,14 +48,7 @@ describe('<Validator />', () => {
 
     it('should render if loading', () => {
       const node = shallow(
-        <Validator
-          rules={[]}
-          isBemDetected={false}
-          isValid={false}
-          loading
-          inspectElement={inspectElement}
-          error={null}
-        />,
+        <Validator rules={[]} isBemDetected={false} isValid={false} loading inspectElement={inspectElement} error="" />,
       );
 
       expect(node).toMatchSnapshot();
