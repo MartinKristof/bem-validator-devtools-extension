@@ -2,3 +2,4 @@ node_modules/
 yarn-error.log
 web-extension/build
 coverage/
+web-ext-artifacts/

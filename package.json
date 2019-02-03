@@ -19,7 +19,8 @@
     "lint:styles": "stylelint '**/*.scss'",
     "fix:scripts": "eslint src/ web-extension/ tests/ --fix",
     "fix:styles": "stylelint '**/*.scss' --fix",
-    "generate-icons": "svg-icon-generate --svgDir ./assets/svg --destination ./src/ui/redux/components/icons/Icon.js --keepFillColor true --reactPureRender true"
+    "generate-icons": "svg-icon-generate --svgDir ./assets/svg --destination ./src/ui/redux/components/icons/Icon.js --keepFillColor true --reactPureRender true",
+    "web-ext:build": "web-ext build"
   },
   "webExt": {
     "sourceDir": "web-extension/"
@@ -64,6 +65,7 @@
     "style-loader": "^0.13.1",
     "stylelint": "^9.10.1",
     "stylelint-scss": "^3.5.2",
+    "web-ext": "^2.9.3",
     "webpack": "^1.13.1",
     "webpack-create-vendor-chunk": "^0.1.1"
   },
