@@ -1,4 +1,4 @@
 node_modules
 web-extension/build/
-web-extension/icon.svg
+web-extension/icon.png
 tests/**/*.snap

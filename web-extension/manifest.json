@@ -1,4 +1,10 @@
 {
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "martas.kristof@gmail.com",
+      "strict_min_version": "48.0"
+    }
+  },
   "manifest_version": 2,
   "name": "BEM Validator",
   "description": "A DevTools extension for inspecting CSS and validate for BEM",
@@ -11,8 +17,9 @@
     "persistent": false
   },
   "icons": {
-    "48": "icon.svg",
-    "96": "icon.svg"
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
   },
   "content_scripts": [
     {

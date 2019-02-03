@@ -21,6 +21,9 @@
     "fix:styles": "stylelint '**/*.scss' --fix",
     "generate-icons": "svg-icon-generate --svgDir ./assets/svg --destination ./src/ui/redux/components/icons/Icon.js --keepFillColor true --reactPureRender true"
   },
+  "webExt": {
+    "sourceDir": "web-extension/"
+  },
   "author": "Martin Kristof",
   "license": "MIT",
   "devDependencies": {
