@@ -1,10 +1,11 @@
 {
-  "name": "bem-validator",
+  "name": "bem-validator-extension",
   "version": "0.1.0",
-  "description": "",
+  "description": "A DevTools extension for inspecting CSS and validate for BEM",
   "scripts": {
     "build": "webpack",
     "dev": "webpack --watch",
+    "ci": "run-s test lint pretty:check",
     "test": "npm run jest:coverage",
     "jest": "jest --config jest.config.json",
     "jest:watch": "npm run jest -- --watch",
@@ -14,9 +15,9 @@
     "pretty": "prettier --write '{src,style,web-extension,tests}/**/*'",
     "pretty:check": "prettier --list-different '{src,style,web-extension,tests}/**/*'",
     "lint": "run-s lint:scripts lint:styles",
-    "lint:scripts": "eslint src/ web-extension/",
+    "lint:scripts": "eslint src/ web-extension/ tests/",
     "lint:styles": "stylelint '**/*.scss'",
-    "fix:scripts": "eslint src/ web-extension/ --fix",
+    "fix:scripts": "eslint src/ web-extension/ tests/ --fix",
     "fix:styles": "stylelint '**/*.scss' --fix",
     "generate-icons": "svg-icon-generate --svgDir ./assets/svg --destination ./src/ui/redux/components/icons/Icon.js --keepFillColor true --reactPureRender true"
   },
