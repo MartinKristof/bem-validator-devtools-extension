@@ -9,6 +9,7 @@
   "author": "Martin Kristof",
   "description": "A DevTools extension for inspecting CSS and validate for BEM",
   "version": "0.0.4",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
   "permissions": ["activeTab"],
   "devtools_page": "devtools.html",
   "background": {
