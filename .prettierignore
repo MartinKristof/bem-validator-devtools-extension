@@ -2,3 +2,4 @@ node_modules
 web-extension/build/
 web-extension/icon.png
 tests/**/*.snap
+web-extension/icons/
